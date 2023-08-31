@@ -4,7 +4,7 @@ name: Demo CI
   - pull_request
 jobs:
   build: null
-  name: Build and Test
+  name: 'Build and Test'
   runs-on: ubuntu-latest
   steps:
     - name: Checkout
