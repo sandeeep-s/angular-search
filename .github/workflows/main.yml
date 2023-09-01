@@ -1,25 +1,22 @@
 name: Demo CI
-'on':
-  - push
-  - pull_request
+on: [push, pull_request]
 jobs:
-  build: null
-  name: 'Build and Test'
-  runs-on: ubuntu-latest
-  steps:
+  build:
+    runs-on: ubuntu-latest
+    steps:
     - name: Checkout
-      uses: actions/checkout@v3
+    - uses: actions/checkout@v3
     - name: Use Node 18
       uses: actions/setup-node@v3
       with:
-        node-version: 18
-    - name: Install latest Chrome
+        node-version: '18'
+    - name: Install latest chrome
       run: |
         sudo apt update
         sudo apt --only-upgrade install google-chrome-stable
         google-chrome --version
     - name: Install dependencies
-      run: npm ci
+        run: npm ci
     - name: Run unit tests
       run: xvfb-run npm test -- --watch=false
     - name: Run integration tests
@@ -28,4 +25,5 @@ jobs:
         browser: chrome
         start: npm start
         install: false
-        wait-on: 'http://[::1]:4200'
+        wait-on: 'http://localhost:4200'
+
